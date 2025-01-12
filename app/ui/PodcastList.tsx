@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface Episode {
   id: string;
@@ -14,30 +14,35 @@ interface Episode {
 }
 
 interface PodcastListProps {
+  episodes: Episode[];
+  error: string | null;
+  loading: boolean;
   onEpisodeSelect: (episode: Episode | null) => void;
 }
 
-export default function PodcastList({ onEpisodeSelect }: PodcastListProps) {
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+function LoadingSkeleton() {
+  return (
+    <>
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          className="p-4 rounded-lg bg-zinc-800 animate-pulse"
+        >
+          <div className="flex items-start space-x-4">
+            <div className="w-20 h-20 bg-zinc-700 rounded flex-shrink-0" />
+            <div className="flex-1">
+              <div className="h-5 bg-zinc-700 rounded w-3/4 mb-2" />
+              <div className="h-4 bg-zinc-700 rounded w-1/2" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
 
-  useEffect(() => {
-    async function fetchEpisodes() {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getEpisodes`);
-        if (!response.ok) {
-          const error = await response.json();
-          console.error('Failed to fetch episodes:', error);
-          return;
-        }
-        const data = await response.json();
-        setEpisodes(data.items || []);
-      } catch (error) {
-        console.error('Error fetching episodes:', error);
-      }
-    }
-    fetchEpisodes();
-  }, []);
+export default function PodcastList({ episodes, error, loading, onEpisodeSelect }: PodcastListProps) {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleEpisodeClick = (episode: Episode) => {
     setSelectedId(episode.id);
@@ -47,7 +52,7 @@ export default function PodcastList({ onEpisodeSelect }: PodcastListProps) {
   return (
     <div className="fixed left-[250px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
       <div className="p-6 border-b border-gray-800">
-        <h1 className="text-2xl font-bold mb-2">Africa's Blank Canvas</h1>
+        <h1 className="text-2xl font-bold mb-2 text-white">Africa's Blank Canvas</h1>
         <p className="text-gray-400 mb-4 text-sm">
           A podcast focused on sharing African stories and letting people know it is possible.
         </p>
@@ -56,36 +61,52 @@ export default function PodcastList({ onEpisodeSelect }: PodcastListProps) {
       {/* Scrollable episodes list */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         <div className="p-6 space-y-4">
-          <h2 className="text-lg font-semibold mb-4">All Episodes</h2>
-          {episodes.map((episode) => (
-            <button
-              key={episode.id}
-              onClick={() => handleEpisodeClick(episode)}
-              className={`w-full text-left hover:bg-[#252525] p-3 rounded-lg transition-colors ${
-                selectedId === episode.id ? 'bg-[#252525]' : ''
-              }`}
-            >
-              <div className="flex items-start space-x-3">
-                <img 
-                  src={episode.images[0]?.url} 
-                  alt={episode.name}
-                  className="w-12 h-12 rounded object-cover"
-                />
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-sm font-medium truncate">{episode.name}</h3>
-                  <p className="text-xs text-gray-400 mt-1">
-                    {new Date(episode.release_date).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric'
-                    })}
-                    {' · '}
-                    {Math.floor(episode.duration_ms / 60000)} min
-                  </p>
+          <h2 className="text-lg font-semibold mb-4 text-white">All Episodes</h2>
+          
+          {loading ? (
+            <LoadingSkeleton />
+          ) : error ? (
+            <div className="text-red-500 bg-red-500/10 p-4 rounded-lg">
+              <p className="font-medium">Error loading episodes</p>
+              <p className="text-sm opacity-80 mt-1">{error}</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {episodes.map((episode) => (
+                <div
+                  key={episode.id}
+                  className={`p-4 rounded-lg cursor-pointer transition-colors ${
+                    selectedId === episode.id
+                      ? 'bg-green-500 hover:bg-green-400'
+                      : 'bg-zinc-800 hover:bg-zinc-700'
+                  }`}
+                  onClick={() => handleEpisodeClick(episode)}
+                >
+                  <div className="flex items-start space-x-4">
+                    <img
+                      src={episode.images[0]?.url}
+                      alt={episode.name}
+                      className="w-14 h-14 rounded object-cover flex-shrink-0"
+                    />
+                    <div>
+                      <h3 className={`font-medium mb-1 text-[15px] ${
+                        selectedId === episode.id ? 'text-black' : 'text-white'
+                      }`}>
+                        {episode.name}
+                      </h3>
+                      <div className={`text-[12px] space-x-2 ${
+                        selectedId === episode.id ? 'text-black/70' : 'text-gray-400'
+                      }`}>
+                        <span>{new Date(episode.release_date).toLocaleDateString()}</span>
+                        <span>•</span>
+                        <span>{Math.round(episode.duration_ms / 60000)} min</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
