@@ -1,9 +1,14 @@
-import PodcastList from '../ui/PodcastList';
+import Sidebar from '../ui/Sidebar';
 
-export default function PodcastLayout({
+export default function CertificationsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <div className="flex">
+      <Sidebar />
+      {children}
+    </div>
+  );
 }

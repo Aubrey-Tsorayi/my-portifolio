@@ -1,0 +1,83 @@
+{
+  "certificates": [
+    {
+      "id": "1",
+      "name": "IBM Storage Scale Technical Sales Advanced",
+      "provider": "IBM",
+      "issueDate": "2024-11-13",
+      "expiryDate": "2025-11-12",
+      "badgeIcon": "/badges/IBM/IBM Storage Scale Technical Sales Advanced.png",
+      "description": "The badge earner has demonstrated both advanced knowledge and skill with IBM Storage Scale by successfully completing required learning, and the ability to successfully deliver a client facing Proof of Value which includes defining, building, and delivering a Proof of Concept (PoC). The completed PoC demonstrates that the earner can clearly and effectively show the value clients are looking for from this technology and that the IBM technology meets or exceeds their requirements.",
+      "skills": [
+        "Artificial Intelligence (AI)",
+        "IBM Storage Scale",
+        "IBM Storage Scale System",
+        "Information Lifecycle Management (ILM)"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Fortinet FortiGate 7.4 Administrator",
+      "provider": "Fortinet",
+      "issueDate": "2025-01-10",
+      "expiryDate": "N/A",
+      "badgeIcon": "/badges/Fortinet/Fortinet FortiGate 7.4 Administrator.png",
+      "description": "The FortiOS 7.4 Administrator exam badge recognizes expertise in FortiGate administration. The badge earner has demonstrated knowledge of FortiGate configuration, operation, and day-to-day administration.",
+      "skills": [
+        "Antivirus",
+        "Authentication",
+        "Firewall",
+        "FortiOS",
+        "High Availability",
+        "IPS",
+        "NAT",
+        "Network Security",
+        "Routing",
+        "VDOMS",
+        "VPN",
+        "Web Filtering"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Fortinet Certified Fundamental Cybersecurity",
+      "provider": "Fortinet",
+      "issueDate": "2024-11-07",
+      "expiryDate": "2027-01-10",
+      "badgeIcon": "/badges/Fortinet/Fortinet Certified Fundamentals Cybersecurity.png",
+      "description": "The Fortinet Certified Fundamentals in Cybersecurity certification validates that the earner has mastered the technical skills and knowledge that are required for any entry-level job role in cybersecurity. The curriculum covers today’s threat landscape and the fundamentals of cybersecurity.",
+      "skills": [
+        "Application Security",
+        "Cloud Services",
+        "Cryptography",
+        "Cybersecurity",
+        "Cybersecurity Threats",
+        "Data Privacy",
+        "Endpoint Security",
+        "Infor,amation Security Principles",
+        "Malware Attacks",
+        "Network Security",
+        "Secure SD-WAN",
+        "Security Operations",
+        "Social Engineering",
+        "Threat Intelligence"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Tech Certified Foundations",
+      "provider": "PaperCut",
+      "issueDate": "2024-11-11",
+      "expiryDate": "N/A",
+      "badgeIcon": "/badges/PaperCut/MF_Tech_Certified_Foundation_FA(1).png",
+      "description": "Professional certification in implementing and managing PaperCut print management solutions. Demonstrates expertise in print server deployment, user management, reporting, and implementing sustainable printing practices.",
+      "skills": [
+        "Print Management",
+        "System Administration",
+        "User Management",
+        "Reporting & Analytics",
+        "Sustainability"
+      ]
+    }
+  ]
+}
