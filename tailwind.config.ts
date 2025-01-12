@@ -12,6 +12,16 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontSize: {
+        'xs-custom': '0.75rem',     // 12px
+        'sm-custom': '0.875rem',    // 14px
+        'base-custom': '1rem',      // 16px
+        'lg-custom': '1.125rem',    // 18px
+        'xl-custom': '1.25rem',     // 20px
+        '2xl-custom': '1.5rem',     // 24px
+        '3xl-custom': '1.875rem',   // 30px
+        '4xl-custom': '2.25rem',    // 36px
+      },
     },
   },
   plugins: [],
