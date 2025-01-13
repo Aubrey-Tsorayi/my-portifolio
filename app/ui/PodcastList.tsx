@@ -50,7 +50,7 @@ export default function PodcastList({ episodes, error, loading, onEpisodeSelect 
   };
 
   return (
-    <div className="fixed left-[250px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
+    <div className="fixed left-[300px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
       <div className="p-6 border-b border-gray-800">
         <h1 className="text-2xl font-bold mb-2 text-white">Africa's Blank Canvas</h1>
         <p className="text-gray-400 mb-4 text-sm">

@@ -8,7 +8,9 @@ export default function CertificationsLayout({
   return (
     <div className="flex">
       <Sidebar />
-      {children}
+      <div className="flex-1">
+        {children}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,133 @@
+{
+  "techStacks": [
+    {
+      "id": "frontend",
+      "category": "Frontend Development",
+      "technologies": [
+        {
+          "id": "nextjs",
+          "name": "Next.js",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/1200px-Nextjs-logo.svg.png",
+          "description": "The React Framework for Production",
+          "experience": "2 years",
+          "level": "Intermediate",
+          "projects": [
+            "Portfolio Website",
+            "Translate Africa",
+            "Inventory Management System"
+          ]
+        },
+        {
+          "id": "tailwind",
+          "name": "Tailwind CSS",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1200px-Tailwind_CSS_Logo.svg.png",
+          "description": "A utility-first CSS framework",
+          "experience": "2 years",
+          "level": "Advanced",
+          "projects": [
+            "Portfolio Website",
+            "Translate Africa"
+          ]
+        },
+        {
+          "id": "flutter",
+          "name": "Flutter",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flutter_logo.svg/1200px-Flutter_logo.svg.png",
+          "description": "An open-source mobile app development framework",
+          "experience": "1 year",
+          "level": "Intermediate",
+          "projects": [
+            "Can't Cook",
+            "News Room"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "backend",
+      "category": "Backend Development",
+      "technologies": [
+        {
+          "id": "python",
+          "name": "Python",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png",
+          "description": "High-level programming language for general-purpose programming",
+          "experience": "4 years",
+          "level": "Expert",
+          "projects": [
+            "News Room Api",
+            "Class Management System"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "database",
+      "category": "Database",
+      "technologies": [
+        {
+          "id": "postgresql",
+          "name": "PostgreSQL",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png",
+          "description": "Advanced open source relational database",
+          "experience": "3 years",
+          "level": "Advanced",
+          "projects": [
+            "Inventory Management System"
+          ]
+        },
+        {
+          "id": "sqlite",
+          "name": "SQLite",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/SQLite370.svg/1200px-SQLite370.svg.png",
+          "description": "Self-contained, serverless, zero-configuration, transactional SQL database engine",
+          "experience": "4 years",
+          "level": "Intermediate",
+          "projects": [
+            "Class Management System",
+            "News Room"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "category": "Development Tools & Services",
+      "technologies": [
+        {
+          "id": "prisma",
+          "name": "Prisma",
+          "icon": "https://prismalens.vercel.app/header/logo-dark.svg",
+          "description": "Next-generation Node.js and TypeScript ORM",
+          "experience": "1 year",
+          "level": "Beginner",
+          "projects": [
+            "Inventory Management System"
+          ]
+        },
+        {
+          "id": "git",
+          "name": "Git",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1200px-Git_icon.svg.png",
+          "description": "Distributed version control system",
+          "experience": "4 years",
+          "level": "Advanced",
+          "projects": [
+            "All Projects"
+          ]
+        },
+        {
+          "id": "firebase",
+          "name": "Firebase",
+          "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Firebase_Logo.svg/1200px-Firebase_Logo.svg.png",
+          "description": "Google's mobile and web application development platform",
+          "experience": "1 year",
+          "level": "Beginner",
+          "projects": [
+            "Translate Africa"
+          ]
+        }
+      ]
+    }
+  ]
+}
