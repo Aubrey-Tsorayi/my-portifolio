@@ -52,7 +52,7 @@ export default function CertificatesList({ certificates, error, loading, onCerti
   };
 
   return (
-    <div className="fixed left-[300px] top-0 w-[300px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
+    <div className="fixed left-[300px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
       <div className="p-4 border-b border-gray-800">
         <h1 className="text-xl font-bold mb-1 text-white">Professional Certifications</h1>
         <p className="text-gray-400 text-sm">

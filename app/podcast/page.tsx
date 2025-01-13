@@ -69,6 +69,17 @@ export default function PodcastPage() {
                   <span>•</span>
                   <span>{Math.round(selectedEpisode.duration_ms / 60000)} min</span>
                 </div>
+                <a 
+                  href="https://music.youtube.com/playlist?list=PL8pFxmDm9GjA3wrWxTc_AiV48bfWSt3Zp&si=Nq_CuMYjStISbF4_"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200 mb-4"
+                >
+                  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                  </svg>
+                  Listen on YouTube
+                </a>
               </div>
             </div>
 

@@ -62,24 +62,24 @@ export default function TechStackList({ techStacks, error, loading, onTechSelect
   return (
     <div className="fixed left-[300px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
       <div className="p-6 border-b border-gray-800">
-        <h1 className="text-2xl font-bold mb-2 text-white">Tech Stack</h1>
-        <p className="text-gray-400 mb-4 text-sm">
+        <h1 className="text-xl font-bold mb-1 text-white">Tech Stack</h1>
+        <p className="text-gray-400 text-sm">
           Technologies I use to build software solutions
         </p>
       </div>
 
       {/* Scrollable tech list */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
-        <div className="p-6 space-y-6">
+        <div className="p-4 space-y-3">
           {loading ? (
             <LoadingSkeleton />
           ) : error ? (
             <div className="text-red-500 bg-red-500/10 p-4 rounded-lg">
               <p className="font-medium">Error loading tech stack</p>
-              <p className="text-sm opacity-80 mt-1">{error}</p>
+              <p className="text-xs opacity-80 mt-1">{error}</p>
             </div>
           ) : (
-            <div className="space-y-8">
+            <div className="space-y-2">
               {techStacks.map((stack) => (
                 <div key={stack.id} className="space-y-4">
                   <h2 className="text-lg font-semibold text-white">{stack.category}</h2>
