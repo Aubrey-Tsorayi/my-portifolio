@@ -256,7 +256,7 @@ export default function Sidebar() {
             ></path>
           </svg>
           <div className="flex flex-1 justify-between items-center  ">
-            <p className="ml-1">Africa's Blank Canvas</p>
+            <p className="ml-1">{`Africa's Blank Canva`}s</p>
             <svg
               width="10"
               height="9"

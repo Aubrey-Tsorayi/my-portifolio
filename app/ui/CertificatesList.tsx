@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Certificate {
   id: string;
@@ -8,9 +9,9 @@ interface Certificate {
   provider: string;
   issueDate: string;
   expiryDate: string;
-  credentialId: string;
+  credentialId?: string;
   badgeIcon: string;
-  badgeUrl: string;
+  badgeUrl?: string;
   description: string;
   skills: string[];
 }
@@ -85,9 +86,11 @@ export default function CertificatesList({ certificates, error, loading, onCerti
                   onClick={() => handleCertificateClick(certificate)}
                 >
                   <div className="flex items-start space-x-3">
-                    <img
+                    <Image
                       src={certificate.badgeIcon}
                       alt={certificate.provider}
+                      width={20}
+                      height={20}
                       className="w-14 h-14 rounded object-contain bg-white/10 p-2 flex-shrink-0"
                     />
                     <div>

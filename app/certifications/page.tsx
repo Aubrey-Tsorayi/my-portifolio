@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import CertificatesList from '../ui/CertificatesList';
 import certificatesData from '../../data/certificates.json';
+import Image from 'next/image';
 
 interface Certificate {
   id: string;
@@ -10,9 +11,9 @@ interface Certificate {
   provider: string;
   issueDate: string;
   expiryDate: string;
-  credentialId: string;
+  credentialId?: string;
   badgeIcon: string;
-  badgeUrl: string;
+  badgeUrl?: string;
   description: string;
   skills: string[];
 }
@@ -35,9 +36,11 @@ export default function CertificationsPage() {
             <div className="max-w-3xl -mt-20">
               {/* Certificate Header */}
               <div className="flex flex-col items-center text-center space-y-6 mb-8">
-                <img
+                <Image
                   src={selectedCertificate.badgeIcon}
                   alt={selectedCertificate.provider}
+                  width={20}
+                  height={20}
                   className="w-32 h-32 rounded bg-white/10 p-4 object-contain"
                 />
                 <div>

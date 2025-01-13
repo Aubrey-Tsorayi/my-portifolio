@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import TechStackList from '../ui/TechStackList';
 import techStacksData from '../../data/techstacks.json';
+import Image from 'next/image';
 
 interface Technology {
   id: string;
@@ -33,9 +34,11 @@ export default function Stack() {
               <div className="max-w-3xl -mt-20">
                 {/* Tech Header */}
                 <div className="flex flex-col items-center text-center space-y-6 mb-8">
-                  <img
+                  <Image
                     src={selectedTech.icon}
                     alt={selectedTech.name}
+                    width={50}
+                    height={50}
                     className="w-32 h-32 rounded bg-white/10 p-6 object-contain"
                   />
                   <div>

@@ -1,8 +1,17 @@
+interface Episode {
+  id: string;
+  name: string;
+  release_date: string;
+  external_urls: {
+    spotify: string;
+  };
+}
+
 export default async function Home() {
   // Fetch episodes data
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getEpisodes`);
   const data = await response.json();
-  const episodes = data.items || [];
+  const episodes: Episode[] = data.items || [];
 
   return (
     <div className="flex flex-col items-center">
@@ -63,7 +72,7 @@ export default async function Home() {
               className="text-blue-600"
             >
               {" "}
-              Africa's Blank Canvas{" "}
+              {"Africa's Blank Canvas"}
             </a>{" "}
             podacast. I pocast focused on sharing african stories and leting
             people know it is posibble.
@@ -119,7 +128,7 @@ export default async function Home() {
           className="flex flex-row justify-between items-center space-x-2 group"
         >
           <h1 className="group-hover:text-blue-600 group-hover:underline">
-            Africa's Blank Canvas
+            {"Africa's Blank Canvas"}
           </h1>
           <span className="hidden sm:flex flex-1 border-t border-gray-300 border-dashed shrink dark:border-gray-800"></span>
           <div className="flex items-center space-x-3 text-gray-500">
@@ -144,7 +153,7 @@ export default async function Home() {
       </div>
       <div className="mt-20 text-[18px] w-1/2 space-y-5 mb-10">
         <h4 className="text-xl font-semibold">Most Listened Episodes</h4>
-        {episodes.slice(0, 5).map((episode: any) => (
+        {episodes.slice(0, 5).map((episode: Episode) => (
           <a
             key={episode.id}
             href={episode.external_urls.spotify}

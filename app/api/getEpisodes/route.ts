@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 
+interface SpotifyEpisode {
+  release_date: string;
+  name: string;
+  description: string;
+  duration_ms: number;
+  images: { url: string }[];
+  external_urls: { spotify: string };
+  id: string;
+  html_description?: string;
+}
+
 async function getValidToken() {
   try {
     console.log('Fetching new token...');
@@ -104,7 +115,7 @@ export async function GET() {
       }
 
       // Sort episodes by release date
-      const sortedEpisodes = data.items.sort((a: any, b: any) => {
+      const sortedEpisodes = data.items.sort((a: SpotifyEpisode, b: SpotifyEpisode) => {
         const dateA = new Date(a.release_date);
         const dateB = new Date(b.release_date);
         return dateB.getTime() - dateA.getTime();
@@ -122,7 +133,7 @@ export async function GET() {
         }
 
         // Sort episodes by release date
-        const sortedEpisodes = retryData.items.sort((a: any, b: any) => {
+        const sortedEpisodes = retryData.items.sort((a: SpotifyEpisode, b: SpotifyEpisode) => {
           const dateA = new Date(a.release_date);
           const dateB = new Date(b.release_date);
           return dateB.getTime() - dateA.getTime();

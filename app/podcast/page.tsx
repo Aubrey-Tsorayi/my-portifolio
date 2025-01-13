@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import PodcastList from '../ui/PodcastList';
+import Image from 'next/image';
 
 interface Episode {
   id: string;
@@ -12,7 +13,7 @@ interface Episode {
   external_urls: { spotify: string };
   description: string;
   html_description?: string;
-  uri: string;
+  uri?: string;
 }
 
 export default function PodcastPage() {
@@ -57,9 +58,11 @@ export default function PodcastPage() {
           <div className="max-w-3xl">
             {/* Episode Header */}
             <div className="flex items-start space-x-6 mb-8">
-              <img
+              <Image
                 src={selectedEpisode.images[0]?.url}
                 alt={selectedEpisode.name}
+                width={20}
+                height={20}
                 className="w-32 h-32 rounded-lg object-cover"
               />
               <div>

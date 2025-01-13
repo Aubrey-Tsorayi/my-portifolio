@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Episode {
   id: string;
@@ -11,6 +12,7 @@ interface Episode {
   external_urls: { spotify: string };
   description: string;
   html_description?: string;
+  uri?: string;
 }
 
 interface PodcastListProps {
@@ -52,7 +54,7 @@ export default function PodcastList({ episodes, error, loading, onEpisodeSelect 
   return (
     <div className="fixed left-[300px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
       <div className="p-6 border-b border-gray-800">
-        <h1 className="text-2xl font-bold mb-2 text-white">Africa's Blank Canvas</h1>
+        <h1 className="text-2xl font-bold mb-2 text-white">{`Africa's Blank Canvas`}</h1>
         <p className="text-gray-400 mb-4 text-sm">
           A podcast focused on sharing African stories and letting people know it is possible.
         </p>
@@ -83,9 +85,11 @@ export default function PodcastList({ episodes, error, loading, onEpisodeSelect 
                   onClick={() => handleEpisodeClick(episode)}
                 >
                   <div className="flex items-start space-x-4">
-                    <img
+                    <Image
                       src={episode.images[0]?.url}
                       alt={episode.name}
+                      width={50}
+                      height={50}
                       className="w-14 h-14 rounded object-cover flex-shrink-0"
                     />
                     <div>

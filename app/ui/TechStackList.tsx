@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface Technology {
   id: string;
@@ -50,13 +51,8 @@ export default function TechStackList({ techStacks, error, loading, onTechSelect
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleTechClick = (tech: Technology) => {
-    if (selectedId === tech.id) {
-      setSelectedId(null);
-      onTechSelect(null);
-    } else {
-      setSelectedId(tech.id);
-      onTechSelect(tech);
-    }
+    setSelectedId(tech.id);
+    onTechSelect(tech);
   };
 
   return (
@@ -95,9 +91,11 @@ export default function TechStackList({ techStacks, error, loading, onTechSelect
                         onClick={() => handleTechClick(tech)}
                       >
                         <div className="flex items-start space-x-4">
-                          <img
+                          <Image
                             src={tech.icon}
                             alt={tech.name}
+                            width={20}
+                            height={20}
                             className="w-12 h-12 rounded bg-white/10 p-2 object-contain flex-shrink-0"
                           />
                           <div>
