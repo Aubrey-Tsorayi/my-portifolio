@@ -48,73 +48,107 @@ async function fetchEpisodes(accessToken: string, isRetry = false) {
   // Using TED Radio Hour as a test (a public podcast)
   const showId = '1y0ib1t6UOV4VLVyibU9bh';
   
-  // First, try to get the show details
-  const showUrl = `https://api.spotify.com/v1/shows/${showId}?market=US`;
-  
-  console.log(`${isRetry ? 'Retrying' : 'Making'} show request...`);
-  const showResponse = await fetch(showUrl, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!showResponse.ok) {
-    const errorData = await showResponse.text();
-    console.error('Show fetch failed:', {
-      status: showResponse.status,
-      error: errorData,
-      isRetry
+  try {
+    // First, try to get the show details
+    const showUrl = `https://api.spotify.com/v1/shows/${showId}?market=US`;
+    
+    console.log(`${isRetry ? 'Retrying' : 'Making'} show request...`, {
+      showId,
+      isRetry,
+      hasToken: !!accessToken,
+      tokenLength: accessToken?.length
     });
-    throw new Error(`Failed to fetch show${isRetry ? ' after token refresh' : ''}: ${showResponse.status}`);
-  }
 
-  const showData = await showResponse.json();
-  console.log('Successfully fetched show:', {
-    name: showData.name,
-    total_episodes: showData.total_episodes
-  });
-
-  // Then get the episodes
-  const episodesUrl = `https://api.spotify.com/v1/shows/${showId}/episodes?market=US&limit=50`;
-  console.log(`Fetching episodes for show...`);
-  const episodesResponse = await fetch(episodesUrl, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!episodesResponse.ok) {
-    const errorData = await episodesResponse.text();
-    console.error('Episodes fetch failed:', {
-      status: episodesResponse.status,
-      error: errorData,
-      isRetry
+    const showResponse = await fetch(showUrl, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
     });
-    throw new Error(`Failed to fetch episodes${isRetry ? ' after token refresh' : ''}: ${episodesResponse.status}`);
-  }
 
-  const data = await episodesResponse.json();
-  console.log('Successfully fetched episodes:', {
-    count: data.items?.length
-  });
-  return data;
+    if (!showResponse.ok) {
+      const errorData = await showResponse.text();
+      console.error('Show fetch failed:', {
+        status: showResponse.status,
+        error: errorData,
+        isRetry,
+        responseHeaders: Object.fromEntries(showResponse.headers.entries())
+      });
+
+      // If we get a 401 and haven't retried yet, throw a specific error
+      if (showResponse.status === 401 && !isRetry) {
+        console.log('Token appears to be invalid or expired, will retry with new token');
+        throw new Error('401');
+      }
+      throw new Error(`Failed to fetch show: ${showResponse.status} - ${errorData}`);
+    }
+
+    const showData = await showResponse.json();
+    console.log('Successfully fetched show:', {
+      name: showData.name,
+      total_episodes: showData.total_episodes,
+      id: showData.id
+    });
+
+    // Then get the episodes
+    const episodesUrl = `https://api.spotify.com/v1/shows/${showId}/episodes?market=US&limit=50`;
+    console.log(`Fetching episodes for show...`);
+    const episodesResponse = await fetch(episodesUrl, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!episodesResponse.ok) {
+      const errorData = await episodesResponse.text();
+      console.error('Episodes fetch failed:', {
+        status: episodesResponse.status,
+        error: errorData,
+        isRetry,
+        responseHeaders: Object.fromEntries(episodesResponse.headers.entries())
+      });
+
+      if (episodesResponse.status === 401 && !isRetry) {
+        console.log('Token appears to be invalid or expired during episodes fetch, will retry with new token');
+        throw new Error('401');
+      }
+      throw new Error(`Failed to fetch episodes: ${episodesResponse.status} - ${errorData}`);
+    }
+
+    const data = await episodesResponse.json();
+    console.log('Successfully fetched episodes:', {
+      count: data.items?.length,
+      firstEpisodeName: data.items?.[0]?.name
+    });
+    return data;
+  } catch (error) {
+    // If it's our special 401 error, let it propagate
+    if (error instanceof Error && error.message === '401') {
+      throw error;
+    }
+    // Otherwise, add more context
+    throw new Error(`Error in fetchEpisodes: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
 }
 
 export async function GET() {
-  try {
-    // Get initial token
-    const accessToken = await getValidToken();
+  let retryCount = 0;
+  const MAX_RETRIES = 2;
 
+  async function attemptFetch() {
     try {
-      // Try to fetch episodes
-      const data = await fetchEpisodes(accessToken);
+      console.log(`Attempt ${retryCount + 1}/${MAX_RETRIES + 1} to fetch episodes...`);
+      const accessToken = await getValidToken();
+      console.log('Got access token, fetching episodes...');
+
+      const data = await fetchEpisodes(accessToken, retryCount > 0);
       if (!data.items) {
+        console.log('No episodes found in response');
         return NextResponse.json({ items: [] });
       }
 
-      // Sort episodes by release date
+      console.log(`Sorting ${data.items.length} episodes...`);
       const sortedEpisodes = data.items.sort((a: SpotifyEpisode, b: SpotifyEpisode) => {
         const dateA = new Date(a.release_date);
         const dateB = new Date(b.release_date);
@@ -123,28 +157,25 @@ export async function GET() {
 
       return NextResponse.json({ items: sortedEpisodes });
     } catch (error) {
-      // If first attempt fails with 401, try once more with a new token
-      if (error instanceof Error && error.message.includes('401')) {
-        console.log('Initial request failed with 401, trying with new token...');
-        const newToken = await getValidToken();
-        const retryData = await fetchEpisodes(newToken, true);
-        if (!retryData.items) {
-          return NextResponse.json({ items: [] });
-        }
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error(`Attempt ${retryCount + 1} failed:`, errorMessage);
 
-        // Sort episodes by release date
-        const sortedEpisodes = retryData.items.sort((a: SpotifyEpisode, b: SpotifyEpisode) => {
-          const dateA = new Date(a.release_date);
-          const dateB = new Date(b.release_date);
-          return dateB.getTime() - dateA.getTime();
-        });
-
-        return NextResponse.json({ items: sortedEpisodes });
+      // Check if it's a 401 error and we haven't exceeded max retries
+      if (errorMessage.includes('401') && retryCount < MAX_RETRIES) {
+        retryCount++;
+        console.log(`Retrying due to 401 error (attempt ${retryCount + 1}/${MAX_RETRIES + 1})...`);
+        return attemptFetch();
       }
+
+      // If we've exhausted retries or it's not a 401 error, throw the error
       throw error;
     }
+  }
+
+  try {
+    return await attemptFetch();
   } catch (error) {
-    console.error('Error in getEpisodes:', error);
+    console.error('All attempts failed:', error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Failed to fetch episodes' },
       { status: 500 }

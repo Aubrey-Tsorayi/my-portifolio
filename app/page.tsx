@@ -152,8 +152,8 @@ export default async function Home() {
         </a>
       </div>
       <div className="mt-20 text-[18px] w-1/2 space-y-5 mb-10">
-        <h4 className="text-xl font-semibold">Most Listened Episodes</h4>
-        {episodes.slice(0, 5).map((episode: Episode) => (
+        <h4 className="text-xl font-semibold">Latest Episodes</h4>
+        {episodes.slice(0, 4).map((episode: Episode) => (
           <a
             key={episode.id}
             href={episode.external_urls.spotify}

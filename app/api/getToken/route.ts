@@ -10,6 +10,14 @@ export async function GET() {
   }
 
   try {
+    // Log the credentials being used (but not the actual values)
+    console.log('Using credentials:', {
+      hasClientId: !!client_id,
+      hasClientSecret: !!client_secret,
+      clientIdLength: client_id.length,
+      clientSecretLength: client_secret.length
+    });
+
     const authOptions = {
       method: 'POST',
       headers: {
@@ -17,12 +25,11 @@ export async function GET() {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        grant_type: 'client_credentials',
-        scope: 'user-read-playback-state user-read-currently-playing user-read-playback-position user-read-private user-read-email playlist-read-private playlist-read-collaborative'
+        grant_type: 'client_credentials'
       }).toString(),
     };
 
-    console.log('Requesting Spotify token with scopes...');
+    console.log('Requesting Spotify token...');
     const response = await fetch('https://accounts.spotify.com/api/token', authOptions);
     
     if (!response.ok) {
@@ -39,26 +46,28 @@ export async function GET() {
     }
     
     const data = await response.json();
+    
+    // Log token details (but not the actual token)
     console.log('Token response:', {
+      hasAccessToken: !!data.access_token,
+      tokenLength: data.access_token?.length,
       token_type: data.token_type,
-      expires_in: data.expires_in,
-      scope: data.scope
+      expires_in: data.expires_in
     });
     
     if (!data.access_token) {
       console.error('No access token in response:', data);
       return NextResponse.json({ 
         error: 'No access token in response',
-        response: data
+        details: data
       }, { status: 500 });
     }
 
-    console.log('Successfully obtained Spotify token');
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Token fetch error:', error);
+    console.error('Error getting token:', error);
     return NextResponse.json({ 
-      error: 'Failed to fetch token',
+      error: 'Failed to get token',
       details: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 });
   }
