@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 
 interface SpotifyEpisode {
   release_date: string;
@@ -14,17 +13,21 @@ interface SpotifyEpisode {
 
 async function getToken() {
   try {
-    const headersList = headers();
-    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
-    const host = headersList.get('host') || 'localhost:3000';
-    const tokenUrl = `${protocol}://${host}/api/getToken`;
-    
-    const response = await fetch(tokenUrl, {
-      cache: 'no-store',
+    const clientId = process.env.SPOTIFY_CLIENT_ID;
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+
+    if (!clientId || !clientSecret) {
+      throw new Error('Missing Spotify credentials');
+    }
+
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
       headers: {
-        'Pragma': 'no-cache',
-        'Cache-Control': 'no-cache'
-      }
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
+      },
+      body: 'grant_type=client_credentials',
+      cache: 'no-store',
     });
     
     if (!response.ok) {

@@ -16,18 +16,18 @@ export default async function Home() {
   return (
     <div className="flex flex-col items-center">
       <div
-        className="sticky top-0 left-0 w-full h-10 border-b border-gray-500 opacity-50 mb-20"
+        className="sticky top-0 left-0 w-full h-10 border-b border-gray-500 opacity-50 mb-10 md:mb-20"
         style={{
           backdropFilter: "blur(70px)",
         }}
       ></div>
-      <div className="w-1/2  items-start text-[18px]">
-        <div>
-          <p>
+      <div className="w-[90%] md:w-[70%] lg:w-1/2 px-4 md:px-0 text-[16px] md:text-[18px]">
+        <div className="space-y-6">
+          <p className="leading-relaxed">
             Hello, I am Tutsirayi Tsorayi. I am a
             <a
               href="https://github.com/Aubrey-Tsorayi"
-              className="text-blue-600"
+              className="text-blue-600 hover:text-blue-400 transition-colors"
               target="_blank"
             >
               {" software engineer"}
@@ -36,7 +36,7 @@ export default async function Home() {
             <a
               href="https://www.youtube.com/@AfricasBlankCanvas"
               target="_blank"
-              className="text-blue-600"
+              className="text-blue-600 hover:text-blue-400 transition-colors"
             >
               {" podcaster"}
             </a>
@@ -44,7 +44,7 @@ export default async function Home() {
             <a
               href="https://www.instagram.com/21shots_media"
               target="_blank"
-              className="text-blue-600"
+              className="text-blue-600 hover:text-blue-400 transition-colors"
             >
               {" graphic designer"}
             </a>
@@ -57,7 +57,7 @@ export default async function Home() {
             <a
               href="https://www.kenac.co.zw"
               target="_blank"
-              className="text-blue-600"
+              className="text-blue-600 hover:text-blue-400 transition-colors"
             >
               {" Kenac Computer Systems"}
             </a>
@@ -69,7 +69,7 @@ export default async function Home() {
             <a
               href="https://podcasters.spotify.com/pod/show/africasblankcanvas"
               target="_blank"
-              className="text-blue-600"
+              className="text-blue-600 hover:text-blue-400 transition-colors"
             >
               {" "}
               {"Africa's Blank Canvas"}
@@ -79,7 +79,7 @@ export default async function Home() {
           </p>
         </div>
       </div>
-      <div className="mt-20 text-lg w-1/2 space-y-5">
+      <div className="mt-20 text-lg w-[90%] md:w-[70%] lg:w-1/2 space-y-5">
         <a
           href="https://www.kenac.co.zw"
           target="_blank"
@@ -151,7 +151,7 @@ export default async function Home() {
           </div>
         </a>
       </div>
-      <div className="mt-20 text-[18px] w-1/2 space-y-5 mb-10">
+      <div className="mt-20 text-[16px] md:text-[18px] w-[90%] md:w-[70%] lg:w-1/2 space-y-5 mb-10">
         <h4 className="text-xl font-semibold">Latest Episodes</h4>
         {episodes.slice(0, 4).map((episode: Episode) => (
           <a
