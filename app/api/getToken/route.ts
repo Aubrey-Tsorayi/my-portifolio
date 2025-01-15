@@ -1,4 +1,8 @@
 import { NextResponse } from 'next/server';
+import { headers } from 'next/headers';
+
+export const dynamic = 'force-dynamic'; // Disable static optimization
+export const revalidate = 0; // Disable cache
 
 export async function GET() {
   const client_id = process.env.SPOTIFY_CLIENT_ID;
@@ -63,7 +67,14 @@ export async function GET() {
       }, { status: 500 });
     }
 
-    return NextResponse.json(data);
+    // Return response with no-cache headers
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+      }
+    });
   } catch (error) {
     console.error('Error getting token:', error);
     return NextResponse.json({ 
