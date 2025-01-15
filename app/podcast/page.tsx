@@ -47,7 +47,7 @@ export default function PodcastPage() {
   return (
     <div className="min-h-screen bg-black">
       <div className="lg:hidden flex justify-center p-4 border-b border-gray-800">
-        <h1 className="text-2xl font-bold text-white">Africa's Blank Canvas</h1>
+        <h1 className="text-2xl font-bold text-white">{`Africa's Blank Canvas`}</h1>
       </div>
       
       <div className="flex flex-col lg:flex-row">
