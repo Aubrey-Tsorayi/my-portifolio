@@ -11,10 +11,11 @@
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "axios": "^1.7.9",
+    "buffer": "^6.0.3",
     "clsx": "^2.1.1",
+    "firebase": "^11.1.0",
     "heroicons": "^2.1.5",
     "next": "latest",
-    "buffer": "^6.0.3",
     "query-string": "^9.1.1",
     "react": "^18",
     "react-dom": "^18"

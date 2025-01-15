@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 
 export const dynamic = 'force-dynamic'; // Disable static optimization
 export const revalidate = 0; // Disable cache
