@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 interface Episode {
   id: string;
   name: string;
@@ -7,11 +11,25 @@ interface Episode {
   };
 }
 
-export default async function Home() {
-  // Fetch episodes data
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getEpisodes`);
-  const data = await response.json();
-  const episodes: Episode[] = data.items || [];
+export default function Home() {
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEpisodes = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/getEpisodes`);
+        const data = await response.json();
+        setEpisodes(data.items || []);
+      } catch (error) {
+        console.error('Error fetching episodes:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEpisodes();
+  }, []);
 
   return (
     <div className="flex flex-col items-center">
@@ -153,26 +171,38 @@ export default async function Home() {
       </div>
       <div className="mt-20 text-[16px] md:text-[18px] w-[90%] md:w-[70%] lg:w-1/2 space-y-5 mb-10">
         <h4 className="text-xl font-semibold">Latest Episodes</h4>
-        {episodes.slice(0, 4).map((episode: Episode) => (
-          <a
-            key={episode.id}
-            href={episode.external_urls.spotify}
-            target="_blank"
-            className="flex flex-row justify-between items-center space-x-2 group"
-          >
-            <h1 className="group-hover:text-blue-600 group-hover:underline">
-              {episode.name}
-            </h1>
-            <span className="hidden sm:flex flex-1 border-t border-gray-300 border-dashed shrink dark:border-gray-800"></span>
-            <div className="flex items-center space-x-3 text-gray-500">
-              <p>{new Date(episode.release_date).toLocaleDateString('en-US', { 
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              })}</p>
-            </div>
-          </a>
-        ))}
+        {isLoading ? (
+          <div className="space-y-4">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="flex flex-row justify-between items-center space-x-2 animate-pulse">
+                <div className="h-5 bg-gray-200 rounded w-[60%]"></div>
+                <span className="hidden sm:flex flex-1 border-t border-gray-200 border-dashed shrink mx-4"></span>
+                <div className="h-5 bg-gray-200 rounded w-[20%]"></div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          episodes.slice(0, 4).map((episode) => (
+            <a
+              key={episode.id}
+              href={episode.external_urls.spotify}
+              target="_blank"
+              className="flex flex-row justify-between items-center space-x-2 group"
+            >
+              <h1 className="group-hover:text-blue-600 group-hover:underline">
+                {episode.name}
+              </h1>
+              <span className="hidden sm:flex flex-1 border-t border-gray-300 border-dashed shrink dark:border-gray-800"></span>
+              <div className="flex items-center space-x-3 text-gray-500">
+                <p>{new Date(episode.release_date).toLocaleDateString('en-US', { 
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}</p>
+              </div>
+            </a>
+          ))
+        )}
       </div>
     </div>
   );

@@ -27,13 +27,13 @@ async function getToken() {
         'Authorization': 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64'),
       },
       body: 'grant_type=client_credentials',
-      cache: 'no-store',
+      next: { revalidate: 3600 }, // Cache token for 1 hour
     });
-    
+
     if (!response.ok) {
-      throw new Error(`Token request failed with status: ${response.status}`);
+      throw new Error(`Failed to get token: ${response.status}`);
     }
-    
+
     const data = await response.json();
     return data.access_token;
   } catch (error) {
@@ -48,46 +48,52 @@ async function fetchEpisodes(token: string): Promise<SpotifyEpisode[]> {
     throw new Error('Missing Spotify show ID');
   }
 
-  const response = await fetch(
-    `https://api.spotify.com/v1/shows/${showId}/episodes?market=US&limit=50`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  try {
+    const response = await fetch(
+      `https://api.spotify.com/v1/shows/${showId}/episodes?market=US&limit=50`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        next: { revalidate: 3600 }, // Cache episodes for 1 hour
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch episodes: ${response.status}`);
     }
-  );
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch episodes: ${response.status}`);
+    const data = await response.json();
+    return data.items;
+  } catch (error) {
+    console.error('Error fetching episodes:', error);
+    throw error;
   }
-
-  const data = await response.json();
-  return data.items;
 }
 
 export async function GET() {
   try {
     const token = await getToken();
     const episodes = await fetchEpisodes(token);
-    
+
     // Sort episodes by release date (newest first)
     const sortedEpisodes = episodes.sort((a, b) => {
       return new Date(b.release_date).getTime() - new Date(a.release_date).getTime();
     });
-    
-    return NextResponse.json({ 
-      items: sortedEpisodes 
-    }, {
-      headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-      }
-    });
-  } catch (error) {
-    console.error('Error in GET episodes:', error);
+
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Unknown error' },
+      { items: sortedEpisodes },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=3600', // Cache for 1 hour
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    );
+  } catch (error) {
+    console.error('API Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch episodes' },
       { status: 500 }
     );
   }
