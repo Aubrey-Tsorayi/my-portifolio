@@ -13,8 +13,8 @@ interface SpotifyEpisode {
 
 async function getToken() {
   try {
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+    const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+    const clientSecret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 
     if (!clientId || !clientSecret) {
       throw new Error('Missing Spotify credentials');
@@ -43,7 +43,7 @@ async function getToken() {
 }
 
 async function fetchEpisodes(token: string): Promise<SpotifyEpisode[]> {
-  const showId = process.env.SPOTIFY_SHOW_ID;
+  const showId = process.env.NEXT_PUBLIC_SPOTIFY_SHOW_ID;
   if (!showId) {
     throw new Error('Missing Spotify show ID');
   }

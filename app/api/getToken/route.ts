@@ -4,8 +4,8 @@ export const dynamic = 'force-dynamic'; // Disable static optimization
 export const revalidate = 0; // Disable cache
 
 export async function GET() {
-  const client_id = process.env.SPOTIFY_CLIENT_ID;
-  const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+  const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+  const client_secret = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 
   if (!client_id || !client_secret) {
     console.error('Missing credentials:', { client_id: !!client_id, client_secret: !!client_secret });
