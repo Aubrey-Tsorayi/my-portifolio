@@ -39,8 +39,8 @@ export default function CertificationsPage() {
                 <Image
                   src={selectedCertificate.badgeIcon}
                   alt={selectedCertificate.provider}
-                  width={20}
-                  height={20}
+                  width={100}
+                  height={100}
                   className="w-32 h-32 rounded bg-white/10 p-4 object-contain"
                 />
                 <div>
