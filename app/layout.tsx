@@ -37,6 +37,7 @@ export default function RootLayout({
       >
         <div className="relative h-full min-h-screen w-full flex flex-1">
           <div className="w-[300px]">
+          <SpeedInsights/>
             <Sidebar />
           </div>
           <div className="flex-1">{children}</div>
