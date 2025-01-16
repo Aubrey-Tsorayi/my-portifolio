@@ -1,4 +1,4 @@
-//import { headers } from 'next/headers';
+import { headers } from 'next/headers';
 
 interface TokenData {
   access_token: string;
@@ -40,9 +40,9 @@ class TokenManager {
   }
 
   private async fetchNewToken(): Promise<TokenData> {
-    //const headersList = headers();
+    const headersList = headers();
     const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
-    const host = 'localhost:3000';
+    const host = headersList.get('host') || 'localhost:3000';
     const tokenUrl = `${protocol}://${host}/api/getToken`;
 
     const response = await fetch(tokenUrl, {
