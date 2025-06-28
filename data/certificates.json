@@ -78,6 +78,94 @@
         "Reporting & Analytics",
         "Sustainability"
       ]
+    },
+    {
+      "id": "5",
+      "name": "LPIC 1",
+      "provider": "Linux Professional Institute",
+      "issueDate": "2025-02-28",
+      "expiryDate": "2030-06-13",
+      "badgeIcon": "/badges/LPIC/lpic-1.png",
+      "description": "This badge has demonstrated they are able to: understand the architecture of a Linux system; install and maintain a Linux workstation, including X11 and setup it up as a network client; work at the Linux command line, including common GNU and Unix commands; handle files and access permissions as well as system security; and perform easy maintenance tasks: help users, add users to a larger system, backup and restore, shutdown and reboot.",
+      "skills": [
+        "Apt",
+        "Bash",
+        "Command Line",
+        "Cron",
+        "Dpkg",
+        "File Systems",
+        "GPG",
+        "GRUB",
+        "Linux",
+        "Linux Administration",
+        "Linux Installation",
+        "Linux Configuration",
+        "Linux Networking",
+        "Linux Package Management",
+        "Linux Security",
+        "Linux User Management",
+        "NTP",
+        "RPM",
+        "Shell Scripting",
+        "SQL",
+        "SSH",
+        "Syslog",
+        "YUM"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "LPIC 2",
+      "provider": "Linux Professional Institute",
+      "issueDate" : "2025-06-13",
+      "expiryDate": "2030-06-13",
+      "badgeIcon": "/badges/LPIC/lpic-2.png",
+      "description": "This badge demonstrates advanced system administration skills, including Linux kernel management, system startup, maintenance, block storage, file systems, networking, authentication, and security (e.g., firewalls, VPNs). They can configure network services such as DHCP, DNS, SSH, web, file (FTP, NFS, Samba), and email servers, as well as supervise assistants and advise management on automation and purchases.",
+      "skills": [
+        "Advanced Storage Device Administration",
+        "Capacity Planning",
+        "Domain Name Server",
+        "Email Services",
+        "File Sharing",
+        "File Systems",
+        "HTTPS Services",
+        "Linux Kernel",
+        "Network Client Management",
+        "Networking Configurations",
+        "System Maintenance",
+        "System Security",
+        "System Startup"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Microsoft Certified: Azure Fundamentals",
+      "provider": "Microsoft",
+      "issueDate": "2025-03-15",
+      "expiryDate": "N/A",
+      "badgeIcon": "/badges/Azure/azure-fundamental.svg",
+      "description": "Demonstrate foundational knowledge of cloud concepts, core Azure services, plus Azure management and governance features and tools.",
+      "skills": [
+        "Cloud Computing",
+        "Core Azure Services",
+        "Azure Management",
+        "Azure Governance",
+        "Azure Tools"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Microsoft Certified: Azure AI Fundamentals",
+      "provider": "Microsoft",
+      "issueDate": "2025-06-20",
+      "expiryDate": "N/A",
+      "badgeIcon": "/badges/Azure/azure-ai-fundamental.svg",
+      "description": "Demonstrate fundamental AI concepts related to the development of software and services of Microsoft Azure to create AI solutions.",
+      "skills": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Computer Vision"
+      ]
     }
   ]
 }

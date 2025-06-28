@@ -18,7 +18,7 @@ interface Certificate {
   skills: string[];
 }
 
-export default function CertificationsPage() {
+export default function CredentialsPage() {
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
 
   return (

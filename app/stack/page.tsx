@@ -33,9 +33,9 @@ export default function Stack() {
         />
         
         {selectedTech ? (
-          <div className="flex-1 relative">
+          <div className="flex-1 relative lg:ml-[650px]">
             <div className="min-h-screen flex items-center justify-center p-4 md:p-8">
-              <div className="w-full max-w-3xl -mt-10 md:-mt-20">
+              <div className="w-4/5 mx-auto -mt-10 md:-mt-20">
                 {/* Tech Header */}
                 <div className="flex flex-col items-center text-center space-y-4 md:space-y-6 mb-6 md:mb-8">
                   <Image
@@ -43,17 +43,17 @@ export default function Stack() {
                     alt={selectedTech.name}
                     width={100}
                     height={100}
-                    className="w-24 h-24 md:w-32 md:h-32 rounded bg-white/10 p-4 md:p-6 object-contain"
+                    className="rounded-md bg-white p-2 w-24 h-24 md:w-32 md:h-32 object-contain"
                   />
                   <div>
                     <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
                       {selectedTech.name}
                     </h1>
-                    <div className="flex items-center justify-center space-x-4 text-gray-400 text-sm md:text-base">
+                    {/* <div className="flex items-center justify-center space-x-4 text-gray-400 text-sm md:text-base">
                       <span className="md:text-lg">{selectedTech.level}</span>
                       <span>•</span>
                       <span>{selectedTech.experience} Experience</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -83,7 +83,7 @@ export default function Stack() {
             </div>
           </div>
         ) : (
-          <div className="hidden lg:flex flex-1 items-center justify-center">
+          <div className="hidden lg:flex flex-1 items-center justify-center lg:ml-[650px]">
           </div>
         )}
       </div>

@@ -55,7 +55,7 @@ export default function CertificatesList({ certificates, error, loading, onCerti
   return (
     <div className="fixed left-[300px] top-0 w-[350px] h-screen bg-[#171717] border-r border-gray-800 flex flex-col">
       <div className="p-4 border-b border-gray-800">
-        <h1 className="text-xl font-bold mb-1 text-white">Professional Certifications</h1>
+        <h1 className="text-xl font-bold mb-1 text-white">Professional Credentials</h1>
         <p className="text-gray-400 text-sm">
           Industry-recognized credentials
         </p>
@@ -64,7 +64,7 @@ export default function CertificatesList({ certificates, error, loading, onCerti
       {/* Scrollable certificates list */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         <div className="p-4 space-y-3">
-          <h2 className="text-sm font-semibold mb-3 text-gray-400 uppercase tracking-wider">All Certifications</h2>
+          <h2 className="text-sm font-semibold mb-3 text-gray-400 uppercase tracking-wider">All Credentials</h2>
           
           {loading ? (
             <LoadingSkeleton />

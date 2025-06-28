@@ -90,16 +90,16 @@ export default function TechStackList({ techStacks, error, loading, onTechSelect
                         }`}
                         onClick={() => handleTechClick(tech)}
                       >
-                        <div className="flex items-start space-x-4">
+                        <div className="flex items-center space-x-4">
                           <Image
                             src={tech.icon}
                             alt={tech.name}
                             width={20}
                             height={20}
-                            className="w-12 h-12 rounded bg-white/10 p-2 object-contain flex-shrink-0"
+                            className="w-12 h-12 rounded bg-white p-2 object-contain flex-shrink-0"
                           />
                           <div>
-                            <h3 className={`font-medium mb-1 text-[15px] ${
+                            <h3 className={`font-medium text-base ${
                               selectedId === tech.id ? 'text-white' : 'text-white'
                             }`}>
                               {tech.name}
@@ -107,9 +107,6 @@ export default function TechStackList({ techStacks, error, loading, onTechSelect
                             <div className={`text-[12px] space-x-2 ${
                               selectedId === tech.id ? 'text-white/70' : 'text-gray-400'
                             }`}>
-                              <span>{tech.level}</span>
-                              <span>•</span>
-                              <span>{tech.experience}</span>
                             </div>
                           </div>
                         </div>

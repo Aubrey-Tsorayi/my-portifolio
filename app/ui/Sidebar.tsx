@@ -74,10 +74,24 @@ export default function Sidebar() {
           </svg>
           <p className="ml-2">Podcast</p>
         </Link>
-        <Link href="/certifications"
+        <Link
+          href="/writing"
+          className={`flex place-items-center  h-fit p-1 rounded-md hover:bg-[#404040] text-[15px] mt-2 hover:cursor-pointer ${pathname === "/writing" ? "bg-[#404040]" : ""}`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M17.414 2.586a2 2 0 0 0-2.828 0l-9.9 9.9A2 2 0 0 0 4 14.314V17a1 1 0 0 0 1 1h2.686a2 2 0 0 0 1.414-.586l9.9-9.9a2 2 0 0 0 0-2.828l-1.586-1.586zM6.414 16H5v-1.414l8.293-8.293 1.414 1.414L6.414 16zm10.293-8.293-1.414-1.414 1.293-1.293a1 1 0 0 1 1.414 1.414l-1.293 1.293z"/>
+          </svg>
+          <p className="ml-2">Writing</p>
+        </Link>
+        <Link href="/credentials"
           
-            className={`flex place-items-center  h-fit p-1 rounded-md hover:bg-[#404040] text-[15px] mt-2 hover:cursor-pointer ${pathname === "/certifications" ? "bg-[#404040]" : ""
-              }`}
+            className={`flex place-items-center  h-fit p-1 rounded-md hover:bg-[#404040] text-[15px] mt-2 hover:cursor-pointer ${pathname === "/credentials" ? "bg-[#404040]" : ""}`}
           >
             <svg 
             width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -87,9 +101,19 @@ export default function Sidebar() {
                 <path d="M23 1v18h-3v-1h2V2H2v16h8v1H1V1zm-7 2H8v1h8zm-2 3V5h-4v1zm-7 5H3v1h4zm0 2H3v1h4zm-4 3h2v-1H3zm14-3a2 2 0 1 1-2-2 2.002 2.002 0 0 1 2 2zm-1 0a1 1 0 1 0-1 1 1.001 1.001 0 0 0 1-1zm.002-4.293a.965.965 0 0 0 1.32.55 1.08 1.08 0 0 1 1.213.207 1.066 1.066 0 0 1 .21 1.21.966.966 0 0 0 .548 1.324 1.064 1.064 0 0 1 0 2.004.965.965 0 0 0-.549 1.323A1.05 1.05 0 0 1 18 16.816v7.046l-3-2.538-3 2.538v-7.046a1.05 1.05 0 0 1-.744-1.49.965.965 0 0 0-.549-1.324 1.064 1.064 0 0 1 0-2.004.966.966 0 0 0 .549-1.324 1.066 1.066 0 0 1 .209-1.21 1.08 1.08 0 0 1 1.212-.206.965.965 0 0 0 1.32-.551 1.064 1.064 0 0 1 2.005 0zm.998 13v-5.04a.93.93 0 0 0-.998.625 1.064 1.064 0 0 1-2.004 0 .93.93 0 0 0-.998-.625v5.039l2-1.692zm-1.94-4.749a1.967 1.967 0 0 1 1.853-1.308 2.12 2.12 0 0 1 .87.197l.058-.091a1.964 1.964 0 0 1 1.116-2.695v-.122a1.966 1.966 0 0 1-1.116-2.695l-.087-.084a1.965 1.965 0 0 1-2.694-1.117h-.12a1.965 1.965 0 0 1-2.694 1.117l-.087.084a1.966 1.966 0 0 1-1.116 2.695v.122a1.964 1.964 0 0 1 1.116 2.695l.058.09a2.12 2.12 0 0 1 .87-.196 1.967 1.967 0 0 1 1.853 1.308L15 17z"></path><path fill="none" d="M0 0h24v24H0z"></path></g>
             </svg>
             <p className="ml-2">
-              Certifications
+              Credentials
             </p>
           
+        </Link>
+
+        <Link
+          href="/resume"
+          className={`flex place-items-center  h-fit p-1 rounded-md hover:bg-[#404040] text-[15px] mt-2 hover:cursor-pointer ${pathname === "/resume" ? "bg-[#404040]" : ""}`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7.828a2 2 0 0 0-.586-1.414l-3.828-3.828A2 2 0 0 0 11.172 2H6zm2 12a1 1 0 1 1 0-2h4a1 1 0 1 1 0 2H8zm0-4a1 1 0 1 1 0-2h4a1 1 0 1 1 0 2H8z"/>
+          </svg>
+          <p className="ml-2">Resume (CV)</p>
         </Link>
 
 
@@ -102,25 +126,6 @@ export default function Sidebar() {
           className={`flex place-items-center justify-between  h-fit p-1 rounded-md hover:bg-[#404040] text-[15px] mt-2`}
         >
           <p className="">Gear Tracker</p>
-          <svg
-            width="10"
-            height="9"
-            viewBox="0 0 10 9"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.00195 6.32617V0.824219C9.00195 0.490234 8.79102 0.267578 8.45117 0.267578L2.94922 0.279297C2.62109 0.279297 2.41016 0.519531 2.41016 0.794922C2.41016 1.07031 2.65039 1.30469 2.92578 1.30469H4.66602L7.45508 1.19922L6.39453 2.13672L1.16211 7.38086C1.05664 7.48633 0.998047 7.61523 0.998047 7.73828C0.998047 8.01367 1.24414 8.27734 1.53125 8.27734C1.66602 8.27734 1.78906 8.22461 1.89453 8.11914L7.13281 2.875L8.07617 1.81445L7.96484 4.48047V6.34961C7.96484 6.61914 8.19922 6.86523 8.48633 6.86523C8.76172 6.86523 9.00195 6.63672 9.00195 6.32617Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </a>
-        <a
-          href="#"
-          target="_blank"
-          className={`flex place-items-center justify-between  h-fit p-1 rounded-md hover:bg-[#404040] text-[15px] mt-2 `}
-        >
-          <p className="">News Room</p>
           <svg
             width="10"
             height="9"

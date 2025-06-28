@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'i.scdn.co',  // Spotify's image CDN
       },
+      {
+        protocol: 'https',
+        hostname: 'i.pinimg.com',
+      }
     ],
   },
 }

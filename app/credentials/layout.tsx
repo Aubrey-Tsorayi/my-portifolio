@@ -1,6 +1,6 @@
 import Sidebar from '../ui/Sidebar';
 
-export default function CertificationsLayout({
+export default function CredentialsLayout({
   children,
 }: {
   children: React.ReactNode;

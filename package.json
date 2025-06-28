@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
     "@heroicons/react": "^2.1.5",
     "@vercel/speed-insights": "^1.1.0",
     "axios": "^1.7.9",
     "buffer": "^6.0.3",
     "clsx": "^2.1.1",
     "firebase": "^11.1.0",
+    "graphql": "^16.11.0",
+    "graphql-request": "^7.2.0",
     "heroicons": "^2.1.5",
     "next": "latest",
     "query-string": "^9.1.1",

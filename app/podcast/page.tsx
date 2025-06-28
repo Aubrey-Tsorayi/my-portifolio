@@ -45,12 +45,12 @@ export default function PodcastPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black flex flex-col">
       <div className="lg:hidden flex justify-center p-4 border-b border-gray-800">
         <h1 className="text-2xl font-bold text-white">{`Africa's Blank Canvas`}</h1>
       </div>
       
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row flex-1">
         <PodcastList 
           episodes={episodes}
           error={error}
@@ -59,8 +59,8 @@ export default function PodcastPage() {
         />
 
         {selectedEpisode ? (
-          <div className="flex-1 align-center p-4 md:p-8 lg:p-12">
-            <div className="max-w-3xl mx-auto">
+          <div className="flex-1 flex items-center justify-center">
+            <div className="w-full max-w-3xl max-h-[90vh] bg-zinc-900/50 rounded-lg overflow-auto p-4 md:p-8">
               <div className="flex flex-col md:flex-row items-start gap-6 mb-8">
                 <Image
                   src={selectedEpisode.images[0]?.url}
@@ -82,7 +82,7 @@ export default function PodcastPage() {
               </div>
 
               <div className="space-y-6">
-                <div className="bg-zinc-900/50 rounded-lg p-4 md:p-6">
+                <div>
                   <h2 className="text-lg md:text-xl font-semibold text-white mb-4">About this episode</h2>
                   <div className="text-gray-300 text-sm md:text-base space-y-4 leading-relaxed"
                     dangerouslySetInnerHTML={{
@@ -119,7 +119,7 @@ export default function PodcastPage() {
             </div>
           </div>
         ) : (
-          <div className="hidden lg:flex flex-1 items-center justify-center">
+          <div className="hidden lg:flex flex-1 items-center justify-center lg:ml-[650px]">
           </div>
         )}
       </div>
