@@ -44,11 +44,25 @@ export async function GET() {
     const data = await request<HashnodeResponse>(HASHNODE_API, GET_POSTS);
     const posts = data.publication?.posts?.edges?.map((edge) => edge.node) || [];
     return NextResponse.json(posts);
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Improved error logging for debugging
-    console.error('Error fetching writings:', error?.response?.errors || error);
+    let details = 'Unknown error';
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'response' in error &&
+      error.response &&
+      typeof error.response === 'object' &&
+      'errors' in error.response
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      details = error.response.errors || (error as any).message;
+    } else if (error instanceof Error) {
+      details = error.message;
+    }
+    console.error('Error fetching writings:', details);
     return NextResponse.json(
-      { error: 'Failed to fetch writings.', details: error?.response?.errors || error.message },
+      { error: 'Failed to fetch writings.', details },
       { status: 500 }
     );
   }

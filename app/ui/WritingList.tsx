@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 
 type Post = {
   title: string;
@@ -76,7 +77,7 @@ export default function WritingList({ posts, error, loading, onPostSelect }: Wri
                 >
                   <div className="flex items-start space-x-4">
                     {post.coverImage?.url && (
-                      <img
+                      <Image
                         src={post.coverImage.url}
                         alt={post.title}
                         width={80}

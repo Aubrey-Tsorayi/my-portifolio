@@ -57,11 +57,17 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json(data.publication.post);
-  } catch (error: any) {
-    // ✅ Enhanced error details
-    const errorDetails = error.response?.errors?.[0]?.message || error.message;
+  } catch (error: unknown) {
+    let errorDetails = 'Unknown error';
+    if (typeof error === 'object' && error !== null && 'response' in error && error.response && typeof error.response === 'object' && 'errors' in error.response) {
+      // @ts-expect-error: catch block may contain any type of error
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      errorDetails = error.response.errors?.[0]?.message || (error as any).message;
+    } else if (error instanceof Error) {
+      errorDetails = error.message;
+    }
     console.error(`Error fetching post: ${slug}`, errorDetails);
-    
+
     return NextResponse.json(
       { 
         error: 'Failed to fetch post', 
